@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Herrera Moreno & Farfán · Ingeniería Civil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233F;
+    --navy-deep:#0E1830;
+    --paper:#EEF1EE;
+    --paper-line:#D7DDD6;
+    --terracotta:#C1613B;
+    --steel:#4C6A8C;
+    --ink:#16202B;
+    --ink-soft:#4A5560;
+    --white:#FCFDFB;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.6;
+  }
+  h1,h2,h3,.disp{font-family:'Space Grotesk', sans-serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+
+  /* ---- Blueprint grid background ---- */
+  .grid-bg{
+    background-image:
+      linear-gradient(var(--paper-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--paper-line) 1px, transparent 1px);
+    background-size:40px 40px;
+  }
+
+  /* ---- Nav ---- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--navy); color:var(--white);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 5%;
+    border-bottom:3px solid var(--terracotta);
+  }
+  nav .brand{font-family:'Space Grotesk'; font-weight:700; font-size:1.05rem; letter-spacing:.02em;}
+  nav .brand span{color:var(--terracotta);}
+  nav ul{list-style:none; display:flex; gap:26px; margin:0; padding:0;}
+  nav a{text-decoration:none; font-family:'IBM Plex Mono'; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:#C9D2DE; transition:color .2s;}
+  nav a:hover{color:var(--terracotta);}
+  .nav-toggle{display:none; background:none; border:none; color:var(--white); font-size:1.4rem; cursor:pointer;}
+
+  @media(max-width:820px){
+    nav ul{position:fixed; top:57px; left:0; right:0; background:var(--navy); flex-direction:column; gap:0; max-height:0; overflow:hidden; transition:max-height .3s ease;}
+    nav ul.open{max-height:400px; border-bottom:3px solid var(--terracotta);}
+    nav ul li{border-top:1px solid #2A3A5C; width:100%;}
+    nav ul a{display:block; padding:14px 5%;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---- Hero / title block ---- */
+  header.hero{
+    padding:70px 5% 40px;
+    position:relative;
+  }
+  .titleblock{
+    max-width:1100px; margin:0 auto;
+    border:2px solid var(--navy);
+    background:var(--white);
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+  }
+  @media(max-width:760px){.titleblock{grid-template-columns:1fr;}}
+  .tb-main{padding:44px 40px; border-right:2px solid var(--navy);}
+  @media(max-width:760px){.tb-main{border-right:none; border-bottom:2px solid var(--navy);}}
+  .eyebrow{
+    font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--steel); margin-bottom:14px;
+  }
+  .tb-main h1{font-size:2.6rem; margin:0 0 8px; color:var(--navy); line-height:1.1;}
+  .tb-main h1 em{font-style:normal; color:var(--terracotta);}
+  .tb-main p.role{font-family:'IBM Plex Mono'; font-size:.9rem; color:var(--ink-soft); margin:0 0 22px;}
+  .tb-main p.pitch{max-width:44ch; font-size:1.05rem; color:var(--ink);}
+  .tb-side{padding:44px 32px; background:var(--navy); color:var(--white); display:flex; flex-direction:column; justify-content:space-between;}
+  .tb-side dl{margin:0; font-family:'IBM Plex Mono'; font-size:.8rem;}
+  .tb-side dt{color:#8EA3BF; text-transform:uppercase; letter-spacing:.08em; font-size:.68rem; margin-top:16px;}
+  .tb-side dt:first-child{margin-top:0;}
+  .tb-side dd{margin:3px 0 0; color:var(--white);}
+  .tb-side .stamp{
+    margin-top:24px; padding-top:16px; border-top:1px solid #2A3A5C;
+    font-size:.7rem; color:var(--terracotta); letter-spacing:.05em;
+  }
+
+  /* ---- Sections ---- */
+  section{padding:80px 5%;}
+  .wrap{max-width:1100px; margin:0 auto;}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:44px; border-bottom:2px solid var(--navy); padding-bottom:14px;}
+  .sec-num{font-family:'IBM Plex Mono'; color:var(--terracotta); font-size:.85rem;}
+  .sec-head h2{font-size:1.8rem; margin:0; color:var(--navy);}
+  .sec-note{margin-left:auto; font-family:'IBM Plex Mono'; font-size:.7rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
+
+  /* Perfil académico */
+  .perfil-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media(max-width:760px){.perfil-grid{grid-template-columns:1fr;}}
+  .perfil-grid p{color:var(--ink);}
+  .perfil-card{border-left:2px solid var(--terracotta); padding-left:22px;}
+  .perfil-name{margin:0 0 2px; color:var(--navy); font-size:1.15rem;}
+  .perfil-role{margin:0 0 16px; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--steel);}
+  .metric-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:20px;}
+  .metric{
+    border:1.5px solid var(--navy); padding:14px 18px; min-width:110px; background:var(--white);
+  }
+  .metric .v{font-family:'Space Grotesk'; font-weight:700; font-size:1.5rem; color:var(--terracotta);}
+  .metric .k{font-family:'IBM Plex Mono'; font-size:.65rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);}
+
+  /* Habilidades */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:1px; background:var(--navy); border:1px solid var(--navy);}
+  .skill-card{background:var(--white); padding:26px 24px;}
+  .skill-card h3{font-size:1rem; margin:0 0 10px; color:var(--navy); font-weight:600;}
+  .skill-card ul{margin:0; padding-left:18px; font-size:.92rem; color:var(--ink-soft);}
+  .skill-card li{margin-bottom:4px;}
+  .who{font-family:'IBM Plex Mono'; font-size:.68rem; color:var(--terracotta); letter-spacing:.02em;}
+  .skills-key{margin-top:16px; font-family:'IBM Plex Mono'; font-size:.68rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+
+  /* Proyectos */
+  .proj-list{display:flex; flex-direction:column; gap:0;}
+  .proj{
+    display:grid; grid-template-columns:110px 1fr; gap:24px;
+    padding:28px 0; border-top:1px solid var(--paper-line);
+  }
+  .proj:last-child{border-bottom:1px solid var(--paper-line);}
+  @media(max-width:640px){.proj{grid-template-columns:1fr;}}
+  .proj .tag{font-family:'IBM Plex Mono'; font-size:.68rem; text-transform:uppercase; letter-spacing:.06em; color:var(--terracotta);}
+  .proj h3{margin:4px 0 8px; font-size:1.15rem; color:var(--navy);}
+  .proj p{margin:0 0 10px; color:var(--ink);}
+  .proj .chips{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{font-family:'IBM Plex Mono'; font-size:.66rem; padding:3px 9px; border:1px solid var(--steel); color:var(--steel); text-transform:uppercase; letter-spacing:.04em;}
+
+  /* Gestión ambiental */
+  .ga-box{
+    background:var(--navy); color:var(--white); padding:44px; position:relative; overflow:hidden;
+  }
+  .ga-box::before{
+    content:""; position:absolute; inset:0;
+    background-image:linear-gradient(#2A3A5C 1px, transparent 1px), linear-gradient(90deg, #2A3A5C 1px, transparent 1px);
+    background-size:30px 30px; opacity:.4;
+  }
+  .ga-box > *{position:relative; z-index:1;}
+  .ga-box h3{margin-top:0; color:var(--white); font-size:1.2rem;}
+  .ga-box p{color:#C9D2DE; max-width:60ch;}
+  .ga-tags{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
+  .ga-tags span{font-family:'IBM Plex Mono'; font-size:.68rem; border:1px solid var(--terracotta); color:var(--terracotta); padding:5px 12px; text-transform:uppercase;}
+
+  /* Blog */
+  .blog-empty{
+    border:1.5px dashed var(--steel); padding:36px; text-align:center; color:var(--ink-soft); font-family:'IBM Plex Mono'; font-size:.82rem;
+  }
+
+  /* Contacto */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--navy); border:1px solid var(--navy);}
+  .contact-grid--single{grid-template-columns:1fr; max-width:420px;}
+  @media(max-width:640px){.contact-grid{grid-template-columns:1fr;}}
+  .contact-card{background:var(--white); padding:30px;}
+  .contact-card h3{margin:0 0 6px; font-size:.95rem; color:var(--navy);}
+  .contact-card a{font-family:'IBM Plex Mono'; font-size:.85rem; color:var(--terracotta); text-decoration:none;}
+  .contact-note{margin-top:30px; font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-soft); max-width:60ch;}
+
+  footer{
+    background:var(--navy-deep); color:#8EA3BF; padding:30px 5%; text-align:center;
+    font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.03em;
+  }
+  footer span{color:var(--terracotta);}
+
+  /* ---- Reduced motion respect ---- */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---- Nav active state ---- */
+  nav a.active{color:var(--terracotta);}
+  nav a{position:relative;}
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--terracotta);
+    transition:width .25s ease;
+  }
+  nav a.active::after, nav a:hover::after{width:100%;}
+
+  /* ---- Hero load-in sequence ---- */
+  .titleblock{opacity:0; transform:translateY(24px); animation:tbIn .7s cubic-bezier(.2,.7,.2,1) .1s forwards;}
+  .tb-side dl dt, .tb-side dl dd{opacity:0; animation:fadeUp .5s ease forwards;}
+  .tb-side dl > *:nth-child(1){animation-delay:.5s;}
+  .tb-side dl > *:nth-child(2){animation-delay:.55s;}
+  .tb-side dl > *:nth-child(3){animation-delay:.6s;}
+  .tb-side dl > *:nth-child(4){animation-delay:.65s;}
+  .tb-side dl > *:nth-child(5){animation-delay:.7s;}
+  .tb-side dl > *:nth-child(6){animation-delay:.75s;}
+  .tb-side dl > *:nth-child(7){animation-delay:.8s;}
+  .tb-side dl > *:nth-child(8){animation-delay:.85s;}
+  .stamp{opacity:0; animation:fadeUp .5s ease .95s forwards;}
+  @keyframes tbIn{to{opacity:1; transform:translateY(0);}}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow, .tb-main h1, .tb-main p.role, .tb-main p.pitch{opacity:0; transform:translateY(14px); animation:fadeUp .6s ease forwards;}
+  .eyebrow{animation-delay:.2s;}
+  .tb-main h1{animation-delay:.28s;}
+  .tb-main p.role{animation-delay:.4s;}
+  .tb-main p.pitch{animation-delay:.48s;}
+
+  /* ---- Scroll reveal ---- */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(20px); transition:opacity .55s ease, transform .55s ease;}
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.in-view > *:nth-child(2){transition-delay:.12s;}
+  .reveal-stagger.in-view > *:nth-child(3){transition-delay:.19s;}
+  .reveal-stagger.in-view > *:nth-child(4){transition-delay:.26s;}
+  .reveal-stagger.in-view > *:nth-child(5){transition-delay:.33s;}
+
+  /* ---- Card hover interactions ---- */
+  .skill-card{transition:transform .3s ease, box-shadow .3s ease; position:relative;}
+  .skill-card:hover{transform:translateY(-6px); box-shadow:0 14px 26px -12px rgba(22,35,63,.35); z-index:2;}
+  .skill-card h3{position:relative;}
+  .skill-card h3::after{
+    content:""; display:block; width:0; height:2px; background:var(--terracotta); margin-top:8px; transition:width .3s ease;
+  }
+  .skill-card:hover h3::after{width:34px;}
+
+  .proj{transition:padding-left .3s ease, background .3s ease;}
+  .proj:hover{padding-left:14px; background:rgba(193,97,59,.05);}
+  .proj .tag{transition:color .3s ease;}
+  .proj:hover .tag{color:var(--navy);}
+  .chip{transition:background .25s ease, color .25s ease;}
+  .proj:hover .chip{background:var(--steel); color:var(--white);}
+
+  .metric{transition:transform .3s ease, border-color .3s ease;}
+  .metric:hover{transform:translateY(-4px); border-color:var(--terracotta);}
+
+  .contact-card a{transition:letter-spacing .25s ease;}
+  .contact-card a:hover{letter-spacing:.03em;}
+
+  /* ---- Cursor-follow glow on hero grid ---- */
+  header.hero{position:relative; overflow:hidden;}
+  header.hero::before{
+    content:""; position:absolute; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(193,97,59,.14), transparent 70%);
+    top:var(--my,-100px); left:var(--mx,-100px);
+    transform:translate(-50%,-50%); pointer-events:none; transition:top .15s linear, left .15s linear;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">HERRERA<span>·</span>FARFÁN</div>
+  <button class="nav-toggle" aria-label="Abrir menú" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <ul id="navlinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#perfil">Perfil</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#ambiental">Gestión Ambiental</a></li>
+    <li><a href="#blog">Publicaciones</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<header class="hero grid-bg" id="inicio">
+  <div class="titleblock">
+    <div class="tb-main">
+      <div class="eyebrow">Página académica &amp; profesional · Trabajo en equipo</div>
+      <h1>Carlos Herrera<br><em>&amp; Laura Farfán</em></h1>
+      <p class="role">Estudiantes de Ingeniería Civil · Décimo y noveno semestre</p>
+      <p class="pitch">Dos miradas complementarias de la ingeniería civil: gestión de obra, diseño hidráulico y de pavimentos por un lado; tránsito, transporte y estructuras por el otro. Este espacio reúne nuestro proceso académico, proyectos y trabajos a lo largo del semestre.</p>
+    </div>
+    <div class="tb-side">
+      <dl>
+        <dt>Universidad</dt>
+        <dd>Universidad Católica de Colombia</dd>
+        <dt>Integrantes</dt>
+        <dd>Carlos Herrera · Laura Farfán</dd>
+        <dt>Códigos</dt>
+        <dd>58001184 · 506528</dd>
+        <dt>Programa</dt>
+        <dd>Ingeniería Civil</dd>
+        <dt>Ciudad</dt>
+        <dd>Bogotá, Colombia</dd>
+      </dl>
+      <div class="stamp mono">REV. 02 — 2026</div>
+    </div>
+  </div>
+</header>
+
+<section id="perfil">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">01</span>
+      <h2>Perfil académico</h2>
+    </div>
+    <div class="perfil-grid reveal">
+      <div class="perfil-card">
+        <h3 class="perfil-name">Carlos Herrera</h3>
+        <p class="perfil-role mono">Décimo semestre · Cód. 58001184</p>
+        <p>Curso mi último semestre de Ingeniería Civil en la Universidad Católica de Colombia. Mi formación se ha enfocado en diseño hidráulico y de acueductos, pavimentos, gestión de proyectos de construcción y métodos de optimización aplicados a la ingeniería.</p>
+        <p>Recientemente completé mi práctica empresarial en <strong>Constructora Prohabitat S.A.S.</strong> (Facatativá), en el proyecto Edificio San Nicolás, experiencia que además desarrollé como mi trabajo de grado.</p>
+        <div class="metric-row">
+          <div class="metric"><div class="v">0.97</div><div class="k">SPI práctica</div></div>
+          <div class="metric"><div class="v">1.02</div><div class="k">CPI práctica</div></div>
+          <div class="metric"><div class="v">88%</div><div class="k">PPC obra</div></div>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <h3 class="perfil-name">Laura Farfán</h3>
+        <p class="perfil-role mono">Noveno semestre · Cód. 506528</p>
+        <p>Soy estudiante de Ingeniería Civil, apasionada por el desarrollo de proyectos que contribuyan a mejorar la infraestructura y la calidad de vida de las personas y comunidades. Durante mi formación he fortalecido mis conocimientos en tránsito y transporte, infraestructura vial, estructuras e hidráulica, con especial interés en la planificación y gestión de sistemas de transporte.</p>
+        <p>Actualmente trabajo en la <strong>Dirección Técnica de Infraestructura de Transmilenio</strong>, como Inspectora de Infraestructura. Me considero una persona responsable, organizada y comprometida con encontrar soluciones eficientes, sostenibles y orientadas a las necesidades de la comunidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="habilidades" class="grid-bg">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">02</span>
+      <h2>Habilidades</h2>
+    </div>
+    <div class="skills-grid reveal-stagger">
+      <div class="skill-card">
+        <h3>Software técnico</h3>
+        <ul>
+          <li>AutoCAD <span class="who">— C · L</span></li>
+          <li>MS Project <span class="who">— C · L</span></li>
+          <li>SAP2000 <span class="who">— L</span></li>
+          <li>Excel avanzado <span class="who">— C</span></li>
+          <li>MATLAB <span class="who">— C</span></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Diseño e ingeniería</h3>
+        <ul>
+          <li>Diseño de acueductos (Hazen-Williams, Hardy-Cross) <span class="who">— C</span></li>
+          <li>Diseño de pavimentos (AASHTO-93) <span class="who">— C</span></li>
+          <li>Modelación y análisis estructural <span class="who">— L</span></li>
+          <li>Planificación de sistemas de transporte <span class="who">— L</span></li>
+          <li>Normativa NSR-10, INVIAS, RAS / Res. 0330 <span class="who">— C · L</span></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Gestión de obra</h3>
+        <ul>
+          <li>Valor ganado (SPI / CPI) <span class="who">— C</span></li>
+          <li>Cortes de obra y control de avance <span class="who">— C</span></li>
+          <li>Inspección de infraestructura <span class="who">— L</span></li>
+          <li>Documentación técnica de proyectos <span class="who">— C · L</span></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Otras habilidades</h3>
+        <ul>
+          <li>Análisis de información y planificación <span class="who">— C · L</span></li>
+          <li>Comunicación técnica y redacción de informes <span class="who">— C · L</span></li>
+          <li>Trabajo en equipo interdisciplinario <span class="who">— C · L</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="skills-key">C = Carlos Herrera &nbsp;·&nbsp; L = Laura Farfán</p>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">03</span>
+      <h2>Proyectos y trabajos</h2>
+    </div>
+    <div class="proj-list reveal-stagger">
+
+      <div class="proj">
+        <div class="tag mono">Práctica empresarial · Tesis</div>
+        <div>
+          <h3>Edificio San Nicolás — Constructora Prohabitat S.A.S.</h3>
+          <p>Seguimiento técnico y administrativo del proyecto en Facatativá: control de avance de obra (15 cortes), análisis de precios unitarios bajo metodología IDU/INVIAS y gestión documental. Trabajo de grado desarrollado a partir de esta experiencia, con indicadores SPI 0.97, CPI 1.02 y PPC 88%.</p>
+          <div class="chips"><span class="chip">Control de obra</span><span class="chip">APU</span><span class="chip">Valor ganado</span></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="tag mono">Diseño hidráulico</div>
+        <div>
+          <h3>Diseño de acueducto — Carmen de Apicalá, Tolima</h3>
+          <p>Diseño integral de sistema de acueducto a partir de la fuente Río Sumapaz: proyección de población, bocatoma lateral y de fondo, aducción, desarenador, conducción (15 km) con análisis de golpe de ariete, tanque de almacenamiento y red de distribución (Hardy-Cross, 33 nodos). Desarrollado bajo la Resolución 0330 de 2017.</p>
+          <div class="chips"><span class="chip">Hazen-Williams</span><span class="chip">Hardy-Cross</span><span class="chip">Res. 0330/2017</span></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="tag mono">Diseño de pavimentos</div>
+        <div>
+          <h3>Variante de Paipa — Ruta Nacional 5502, Boyacá</h3>
+          <p>Diseño de estructura de pavimento flexible para el tramo K0+000–K4+620, con zonificación geotécnica, análisis sísmico (Perfil Tipo E) y estudio de tránsito (W18 = 1,600,000 ejes equivalentes), bajo la metodología AASHTO-93 y normativa NSR-10 / INVIAS. Proyecto grupal.</p>
+          <div class="chips"><span class="chip">AASHTO-93</span><span class="chip">NSR-10</span><span class="chip">Trabajo en equipo</span></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="tag mono">Experiencia profesional</div>
+        <div>
+          <h3>Inspección de Infraestructura — Transmilenio</h3>
+          <p>Laura ejerce actualmente como Inspectora de Infraestructura en la Dirección Técnica de Infraestructura de Transmilenio, donde realiza seguimiento técnico a la infraestructura del sistema, elabora documentación técnica y apoya el control de proyectos dentro de la red de transporte masivo de Bogotá.</p>
+          <div class="chips"><span class="chip">Inspección técnica</span><span class="chip">Transporte masivo</span><span class="chip">Documentación técnica</span></div>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="tag mono">Métodos de optimización</div>
+        <div>
+          <h3>Optimización de canal trapezoidal (TLBO, DEA, PSO)</h3>
+          <p>Implementación en MATLAB de tres algoritmos metaheurísticos —TLBO, DEA y PSO— aplicados a la optimización de un canal trapezoidal, con desarrollo de código, informe técnico e infografía comparativa de resultados.</p>
+          <div class="chips"><span class="chip">MATLAB</span><span class="chip">Algoritmos metaheurísticos</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="ambiental" class="grid-bg">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">04</span>
+      <h2>Gestión ambiental e ingeniería civil</h2>
+      <span class="sec-note">Plantas de tratamiento de agua</span>
+    </div>
+    <div class="ga-box reveal">
+      <h3>Espacio en construcción para la asignatura</h3>
+      <p>Esta sección se irá completando durante el semestre con los análisis ambientales, infografías, casos de estudio y evidencias que se desarrollen en el curso de Plantas de Tratamiento de Agua.</p>
+      <div class="ga-tags">
+        <span>Análisis ambientales</span>
+        <span>Infografías</span>
+        <span>Casos de estudio</span>
+        <span>Sostenibilidad</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">05</span>
+      <h2>Blog / publicaciones</h2>
+    </div>
+    <div class="blog-empty reveal">Aún no hay publicaciones — próximamente reflexiones y aprendizajes del curso.</div>
+  </div>
+</section>
+
+<section id="contacto" class="grid-bg">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-num mono">06</span>
+      <h2>Contacto</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-card">
+        <h3>Carlos Herrera</h3>
+        <a href="mailto:caherrera84@ucatolica.edu.co">caherrera84@ucatolica.edu.co</a>
+      </div>
+      <div class="contact-card">
+        <h3>Laura Farfán</h3>
+        <a href="mailto:Lcfarfan28@ucatolica.edu.co">Lcfarfan28@ucatolica.edu.co</a>
+      </div>
+    </div>
+    <p class="contact-note">No incluyan dirección, número de documento ni teléfono personal en este espacio.</p>
+  </div>
+</section>
+
+<footer>
+  Carlos Herrera Moreno · Laura Farfán · Ingeniería Civil · Universidad Católica de Colombia <span>·</span> 2026
+</footer>
+
+<script>
+  // --- Scroll reveal ---
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('in-view');
+        io.unobserve(en.target);
+      }
+    });
+  }, {threshold:.15});
+  revealEls.forEach(el=>io.observe(el));
+
+  // --- Animated counters for metrics ---
+  const metrics = document.querySelectorAll('.metric .v');
+  const counted = new WeakSet();
+  const mio = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting && !counted.has(en.target)){
+        counted.add(en.target);
+        const el = en.target;
+        const raw = el.textContent.trim();
+        const isPercent = raw.includes('%');
+        const target = parseFloat(raw);
+        const duration = 900;
+        const start = performance.now();
+        function tick(now){
+          const p = Math.min((now-start)/duration, 1);
+          const eased = 1 - Math.pow(1-p, 3);
+          const val = target * eased;
+          el.textContent = (isPercent ? Math.round(val) : val.toFixed(2)) + (isPercent ? '%' : '');
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    });
+  }, {threshold:.5});
+  metrics.forEach(el=>mio.observe(el));
+
+  // --- Nav active section highlight ---
+  const navLinks = document.querySelectorAll('#navlinks a');
+  const sections = [...navLinks].map(l=>document.querySelector(l.getAttribute('href')));
+  const navIo = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        const id = '#' + en.target.id;
+        navLinks.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s=>{ if(s) navIo.observe(s); });
+
+  // --- Close mobile nav on link click ---
+  navLinks.forEach(l=>l.addEventListener('click', ()=>{
+    document.getElementById('navlinks').classList.remove('open');
+  }));
+
+  // --- Cursor-follow glow in hero ---
+  const heroEl = document.querySelector('header.hero');
+  if(heroEl){
+    heroEl.addEventListener('mousemove', (e)=>{
+      const r = heroEl.getBoundingClientRect();
+      heroEl.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      heroEl.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  }
+</script>
+</body>
+</html>
