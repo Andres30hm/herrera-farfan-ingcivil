@@ -170,6 +170,60 @@
   .contact-card a{font-family:'IBM Plex Mono'; font-size:.85rem; color:var(--terracotta); text-decoration:none;}
   .contact-note{margin-top:30px; font-family:'IBM Plex Mono'; font-size:.72rem; color:var(--ink-soft); max-width:60ch;}
 
+  /* ---- Guía ciudadana: acordeón ---- */
+  .guide-intro{max-width:70ch; color:#C9D2DE; margin-bottom:28px;}
+  .guide-intro strong{color:var(--white);}
+  .accordion{display:flex; flex-direction:column; gap:10px;}
+  .accordion details{
+    background:var(--white); border:1px solid var(--navy); overflow:hidden;
+  }
+  .accordion summary{
+    list-style:none; cursor:pointer; padding:16px 20px;
+    display:flex; align-items:center; gap:14px;
+    font-family:'Space Grotesk'; font-weight:600; color:var(--navy); font-size:.98rem;
+  }
+  .accordion summary::-webkit-details-marker{display:none;}
+  .accordion summary .qnum{font-family:'IBM Plex Mono'; color:var(--terracotta); font-size:.78rem; flex-shrink:0;}
+  .accordion summary::after{
+    content:"+"; margin-left:auto; font-family:'IBM Plex Mono'; color:var(--terracotta); font-size:1.1rem; transition:transform .25s ease;
+  }
+  .accordion details[open] summary::after{transform:rotate(45deg);}
+  .accordion .a-body{padding:0 20px 20px 20px; color:var(--ink); font-size:.96rem;}
+  .accordion .a-body p{margin:0 0 12px;}
+  .accordion .a-body ul{margin:0 0 12px; padding-left:20px;}
+  .accordion .a-body li{margin-bottom:4px;}
+
+  /* ---- IRCA scale bar ---- */
+  .irca-scale{margin:14px 0 6px;}
+  .irca-bar{display:flex; height:34px; border:1px solid var(--navy); font-family:'IBM Plex Mono'; font-size:.62rem; color:var(--white);}
+  .irca-bar div{display:flex; align-items:center; justify-content:center; text-align:center; padding:2px;}
+  .irca-seg1{background:#4C8C6A; flex:5;}
+  .irca-seg2{background:#8CAF5C; flex:9;}
+  .irca-seg3{background:#D4A93B; flex:21;}
+  .irca-seg4{background:#C1613B; flex:45;}
+  .irca-seg5{background:#8C2F1B; flex:20;}
+  .irca-labels{display:flex; justify-content:space-between; font-family:'IBM Plex Mono'; font-size:.62rem; color:var(--ink-soft); margin-top:6px;}
+
+  /* ---- Example calculation table ---- */
+  .calc-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:.85rem;}
+  .calc-table th, .calc-table td{border:1px solid var(--paper-line); padding:9px 10px; text-align:left;}
+  .calc-table th{background:var(--navy); color:var(--white); font-family:'IBM Plex Mono'; font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; font-weight:500;}
+  .calc-table td.no-cumple{color:var(--terracotta); font-weight:600;}
+  .calc-table td.cumple{color:#3D7A54;}
+  .calc-result{
+    margin-top:16px; padding:16px 20px; background:var(--navy); color:var(--white);
+    font-family:'IBM Plex Mono'; font-size:.88rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  .calc-result .val{color:var(--terracotta); font-weight:600; font-size:1.1rem;}
+
+  /* ---- Bibliography ---- */
+  .biblio{margin-top:36px; border-top:1px solid var(--paper-line); padding-top:22px;}
+  .biblio h4{font-size:.85rem; text-transform:uppercase; letter-spacing:.05em; color:var(--steel); margin:0 0 12px;}
+  .biblio ol{margin:0; padding-left:20px; font-size:.82rem; color:var(--ink-soft);}
+  .biblio li{margin-bottom:8px;}
+  .biblio a{color:var(--terracotta); text-decoration:none; word-break:break-word;}
+  .biblio a:hover{text-decoration:underline;}
+
   footer{
     background:var(--navy-deep); color:#8EA3BF; padding:30px 5%; text-align:center;
     font-family:'IBM Plex Mono'; font-size:.72rem; letter-spacing:.03em;
@@ -438,13 +492,133 @@
       <span class="sec-note">Plantas de tratamiento de agua</span>
     </div>
     <div class="ga-box reveal">
-      <h3>Espacio en construcción para la asignatura</h3>
-      <p>Esta sección se irá completando durante el semestre con los análisis ambientales, infografías, casos de estudio y evidencias que se desarrollen en el curso de Plantas de Tratamiento de Agua.</p>
-      <div class="ga-tags">
-        <span>Análisis ambientales</span>
-        <span>Infografías</span>
-        <span>Casos de estudio</span>
-        <span>Sostenibilidad</span>
+      <h3>Guía ciudadana: ¿cómo saber si el agua es potable?</h3>
+      <p class="guide-intro">Cada vez que abrimos la llave y sale agua, damos por hecho que es segura. Pero, <strong>¿cómo se sabe realmente que el agua que llega a nuestras casas es potable?</strong> Esta guía responde esa pregunta con lenguaje sencillo, basada en la normativa colombiana que regula la calidad del agua para consumo humano.</p>
+
+      <div class="accordion">
+
+        <details open>
+          <summary><span class="qnum mono">01</span> ¿Qué significa que el agua sea "potable"?</summary>
+          <div class="a-body">
+            <p>Que el agua sea potable significa que se puede beber y usar para cocinar o asearse sin que represente un riesgo para la salud. En Colombia, esto no es una opinión: es una condición que se mide y se compara contra límites definidos por ley. El Decreto 1575 de 2007 y la Resolución 2115 de 2007 establecen cuáles son esos límites y cómo deben verificarse.</p>
+            <p>En otras palabras, un agua es potable cuando cumple, al mismo tiempo, con valores aceptables de características físicas, químicas y microbiológicas — no basta con que se vea limpia o no tenga mal sabor.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">02</span> ¿Qué parámetros se analizan?</summary>
+          <div class="a-body">
+            <p>La normativa agrupa las características del agua en tres grandes familias:</p>
+            <ul>
+              <li><strong>Físicas:</strong> lo que se puede percibir a simple vista o con instrumentos sencillos — turbiedad (qué tan "turbia" se ve), color y olor.</li>
+              <li><strong>Químicas:</strong> sustancias disueltas en el agua, como el pH, el cloro residual (el que queda tras la desinfección), metales como aluminio o hierro, y compuestos como nitratos o fluoruros.</li>
+              <li><strong>Microbiológicas:</strong> presencia de microorganismos, principalmente indicadores de contaminación fecal como los coliformes totales y la Escherichia coli.</li>
+            </ul>
+            <p>Un agua puede verse perfectamente transparente y aun así no ser potable, si falla en alguno de los parámetros químicos o microbiológicos — por eso el análisis de laboratorio es indispensable.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">03</span> ¿Qué son los "análisis básicos" de la Resolución 2115 de 2007?</summary>
+          <div class="a-body">
+            <p>Son el conjunto mínimo de seis parámetros que toda persona prestadora del servicio de acueducto debe medir de forma periódica para vigilar la calidad del agua que distribuye:</p>
+            <ul>
+              <li>Turbiedad</li>
+              <li>Color aparente</li>
+              <li>pH</li>
+              <li>Cloro residual libre</li>
+              <li>Coliformes totales</li>
+              <li>Escherichia coli</li>
+            </ul>
+            <p>Estos seis parámetros son, en la práctica, la primera línea de vigilancia: se miden con más frecuencia que el resto porque reflejan de forma rápida si algo está fallando en el tratamiento o en la red de distribución.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">04</span> ¿Qué son los Coliformes Totales y la Escherichia coli, y por qué importan tanto?</summary>
+          <div class="a-body">
+            <p>Los <strong>coliformes totales</strong> son un grupo de bacterias que, sin ser todas dañinas por sí mismas, funcionan como una "señal de alerta": su presencia indica que algo pudo haber contaminado el agua después del tratamiento o durante su distribución.</p>
+            <p>La <strong>Escherichia coli (E. coli)</strong> es más específica: es un indicador directo de contaminación fecal reciente, humana o animal. Por eso la normativa es estricta al respecto: ninguna muestra de agua para consumo humano puede contener E. coli, sin importar el método de análisis utilizado. Si aparece, es una alerta inmediata de riesgo sanitario.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">05</span> ¿Qué es el IRCA y cómo se interpreta?</summary>
+          <div class="a-body">
+            <p>El <strong>IRCA (Índice de Riesgo de la Calidad del Agua para Consumo Humano)</strong> es un número, expresado en porcentaje, que resume qué tan arriesgada es el agua que le llega a una comunidad. Entre más alto el IRCA, mayor el riesgo para la salud de quienes la consumen.</p>
+            <p>La Resolución 2115 de 2007 clasifica ese porcentaje en cinco niveles:</p>
+            <div class="irca-scale">
+              <div class="irca-bar">
+                <div class="irca-seg1">0–5%</div>
+                <div class="irca-seg2">5.1–14%</div>
+                <div class="irca-seg3">14.1–35%</div>
+                <div class="irca-seg4">35.1–80%</div>
+                <div class="irca-seg5">80.1–100%</div>
+              </div>
+              <div class="irca-labels">
+                <span>Sin riesgo</span>
+                <span>Riesgo bajo</span>
+                <span>Riesgo medio</span>
+                <span>Riesgo alto</span>
+                <span>Inviable sanitariamente</span>
+              </div>
+            </div>
+            <p style="margin-top:14px;">Cuando el IRCA supera 80%, el agua se declara <strong>no apta para consumo humano</strong> y se activan acciones obligatorias por parte de las autoridades sanitarias y ambientales.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">06</span> ¿Cómo se calcula el IRCA? Ejemplo propio del grupo</summary>
+          <div class="a-body">
+            <p>La fórmula, definida en el artículo 14 de la Resolución 2115 de 2007, compara el riesgo de lo que <em>no cumple</em> contra el riesgo total de lo que se analizó:</p>
+            <p class="mono" style="background:var(--paper); padding:12px 16px; border:1px solid var(--paper-line);">IRCA (%) = (Σ puntajes de las características que NO cumplen ÷ Σ puntajes de todas las características analizadas) × 100</p>
+            <p>Cada parámetro tiene un "puntaje de riesgo" fijo asignado por la norma (por ejemplo, la E. coli pesa 25 puntos y la turbiedad 15, porque su incumplimiento es más peligroso que el de otros parámetros). A continuación, un ejemplo elaborado por el grupo con datos hipotéticos de un acueducto veredal, usando los seis análisis básicos:</p>
+            <table class="calc-table">
+              <thead>
+                <tr><th>Parámetro</th><th>Valor obtenido</th><th>Valor aceptable</th><th>¿Cumple?</th><th>Puntaje de riesgo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Turbiedad</td><td>3.5 UNT</td><td>máx. 2 UNT</td><td class="no-cumple">No cumple</td><td>15</td></tr>
+                <tr><td>Color aparente</td><td>10 UPC</td><td>máx. 15 UPC</td><td class="cumple">Cumple</td><td>0</td></tr>
+                <tr><td>pH</td><td>7.2</td><td>6.5 – 9.0</td><td class="cumple">Cumple</td><td>0</td></tr>
+                <tr><td>Cloro residual libre</td><td>0.2 mg/L</td><td>0.3 – 2.0 mg/L</td><td class="no-cumple">No cumple</td><td>15</td></tr>
+                <tr><td>Coliformes totales</td><td>0 UFC/100mL</td><td>ausencia</td><td class="cumple">Cumple</td><td>0</td></tr>
+                <tr><td><em>Escherichia coli</em></td><td>0 UFC/100mL</td><td>ausencia</td><td class="cumple">Cumple</td><td>0</td></tr>
+              </tbody>
+            </table>
+            <div class="calc-result">
+              <span>IRCA = (15 + 15) / (15 + 6 + 1.5 + 15 + 15 + 25) × 100 = 30 / 77.5 × 100</span>
+              <span class="val">≈ 38.7% — Riesgo alto</span>
+            </div>
+            <p style="margin-top:14px;">En este ejemplo, aunque no hay contaminación microbiológica, la turbiedad elevada y el cloro residual insuficiente ya son suficientes para llevar el agua a "riesgo alto". Esto es justamente lo que hace útil al IRCA: no basta con que el agua "se vea bien"; el número obliga a mirar el conjunto completo de parámetros.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">07</span> ¿Cómo se monitorea la calidad del agua y por qué debe hacerse periódicamente?</summary>
+          <div class="a-body">
+            <p>Las personas prestadoras del servicio de acueducto deben tomar muestras de agua de forma regular — la frecuencia depende del tamaño de la población atendida: entre más habitantes, más muestras se exigen al mes. Estas muestras se toman en distintos puntos de la red, desde la planta de tratamiento hasta el grifo del usuario final.</p>
+            <p>El monitoreo no puede ser una foto única: la calidad del agua cambia con la lluvia, con daños en la red, con fallas en la desinfección o con la variación de la fuente. Por eso la vigilancia continua es la única forma de detectar a tiempo un problema antes de que afecte la salud de una comunidad completa.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span class="qnum mono">08</span> ¿Qué ocurre cuando el agua no cumple con los requisitos de calidad?</summary>
+          <div class="a-body">
+            <p>Cuando el IRCA de una muestra resulta en riesgo medio o superior, la normativa exige aumentar la frecuencia de muestreo para hacer seguimiento más cercano. Si el IRCA mensual supera el 80% (nivel "inviable sanitariamente"), el agua se declara no apta para consumo humano y se debe informar de inmediato a la persona prestadora del servicio, a las alcaldías, gobernaciones y a las autoridades sanitarias y ambientales competentes, quienes deben actuar según sus funciones — desde exigir correctivos técnicos hasta restringir el uso del agua para consumo directo.</p>
+            <p>Para la comunidad, esto se traduce en medidas como hervir el agua antes de consumirla, uso de agua embotellada mientras se soluciona el problema, o la intervención directa de la infraestructura de tratamiento y distribución.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <div class="biblio">
+        <h4>Fuentes consultadas</h4>
+        <ol>
+          <li>Ministerio de la Protección Social y Ministerio de Ambiente, Vivienda y Desarrollo Territorial. <em>Resolución 2115 de 2007</em>, por medio de la cual se señalan características, instrumentos básicos y frecuencias del sistema de control y vigilancia para la calidad del agua para consumo humano. <a href="https://www.minsalud.gov.co/sites/rid/Lists/BibliotecaDigital/RIDE/DE/DIJ/Resoluci%C3%B3n_2115_de_2007.pdf" target="_blank">minsalud.gov.co</a></li>
+          <li>Ministerio de la Protección Social. <em>Decreto 1575 de 2007</em>, por el cual se establece el Sistema para la Protección y Control de la Calidad del Agua para Consumo Humano.</li>
+          <li>Instituto Nacional de Salud — SIVICAP. Índice de Riesgo de la Calidad del Agua para Consumo Humano (IRCA). <a href="https://orarbo.gov.co/es/indicadores?id=954&v=l" target="_blank">orarbo.gov.co</a></li>
+        </ol>
       </div>
     </div>
   </div>
@@ -476,7 +650,6 @@
         <a href="mailto:Lcfarfan28@ucatolica.edu.co">Lcfarfan28@ucatolica.edu.co</a>
       </div>
     </div>
-    <p class="contact-note">No incluyan dirección, número de documento ni teléfono personal en este espacio.</p>
   </div>
 </section>
 
